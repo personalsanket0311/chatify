@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import authRoute from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 import messageRoute from './routes/message.routes.js';
 import { connectDB } from './lib/db.js';
 import { ENV } from './lib/env.js';
@@ -11,7 +12,8 @@ const PORT = ENV.PORT || 3000;
 
 // 👇 BODY PARSERS FIRST (before routes!)
 app.use(express.json());           // For JSON bodies
-// app.use(express.urlencoded({ extended: true })); // For form data
+app.use(express.urlencoded({ extended: true })); // For form data
+app.use(cookieParser());        // For cookies
 
 // 👇 ROUTES SECOND
 app.use("/api/auth", authRoute);
